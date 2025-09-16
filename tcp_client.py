@@ -9,8 +9,18 @@ import socket
 
 def main():
     # TODO: Create a socket and connect it to the server at the designated IP and port
+    coolsocks = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    ip = "172.20.10.4"
+    port = 6767
+    coolsocks.connect((ip,port))
+    print(f"Connected {ip}:{port}")
     # TODO: Get user input and send it to the server using your TCP socket
+    inp = input("Enter something\n")
+    coolsocks.sendall(inp.encode())
     # TODO: Receive a response from the server and close the TCP connection
+    data = coolsocks.recv(1024)
+    print("Closing connection")
+    coolsocks.close()
     pass
 
 
