@@ -139,7 +139,7 @@ def get_inbox_route(recipient: str):
     res.status_code = 200
     return res
 
-# TODO: implement a rout e to get all mail entries for a sender
+# TODO: implement a route to get all mail entries for a sender
 # HINT: start with soemthing like this:
 #   @app.route('/mail/sent/<sender>', ...)
 
