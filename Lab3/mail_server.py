@@ -107,10 +107,9 @@ def delete_mail_route(mail_id: str):
         bool: True if the mail was deleted, False otherwise
     """
     # TODO: implement this function
-    delete = delete_mail(mail_id)
-    if delete:
-        return True
-    return False
+    res = jsonify(delete_mail(mail_id))
+    res.status_code = 200
+    return res
 
 @app.route('/mail/<mail_id>', methods=['GET'])
 def get_mail_route(mail_id: str):
@@ -146,8 +145,8 @@ def get_inbox_route(recipient: str):
 # HINT: start with soemthing like this:
 #   @app.route('/mail/sent/<sender>', ...)
 @app.route('/mail/sent/<sender>', methods=['GET'])
-def get_sendermail_route(sender: str):
-    res = jsonify(get_inbox(sender))
+def get_sent_route(sender: str):
+    res = jsonify(get_sent(sender))
     res.status_code = 200
     return res
 
