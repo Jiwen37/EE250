@@ -33,24 +33,48 @@ def send_mail(recipient: str, sender: str, subject: str, body: str) -> bool:
 
 def get_inbox(recipient: str) -> None:
     """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    Prints the inbox of a mail recipient by making a GET request to the /{recipient} endpoint, where the recipient is provided in the argument 
+
+    Args:
+        recipient (str): All mail recieved by this person (their inbox) will be printed
+    Returns:
+        None -> does not return anything
     """
     response = requests.get(f'{SERVER}/mail/inbox/{recipient}')
     pprint.pprint(response.json())
 
 def get_sent(sender: str) -> None:
     """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    Prints all the sent mail of a user by making a GET request to the /{sender} endpoint, where the sender is provided in the argument
+
+    Args:
+        sender (str): All mail sent by this person will be printed
+    Returns:
+        None -> does not return anything
     """
     response = requests.get(f'{SERVER}/mail/sent/{sender}')
     pprint.pprint(response.json())
 
 def get_mail(mail_id: str) -> None:
     """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    Prints a mail entry by making a GET request to the /{mail_id} endpoint using the id provided in the argument
+
+    Args:
+        mail_id (str): the id of the mail to be printed
+    Returns:
+        None -> does not return anything
     """
     response = requests.get(f'{SERVER}/mail/{mail_id}')
     pprint.pprint(response.json())
 
 def delete_mail(mail_id: str) -> None:
     """TODO: fill out this docstring (using the send_mail docstring as a guide)
+    Deletes a mail address by making a DELETE request to the /{mail_id} endpoint using the id provided in the argument
+
+    Args:
+        mail_id (str): the id of the mail to be deleted
+    Returns:
+        None -> does not return anything
     """
     response = requests.delete(f'{SERVER}/mail/{mail_id}')
     pprint.pprint(response.json())
