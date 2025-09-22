@@ -36,7 +36,7 @@ def get_inbox(recipient: str) -> None:
     Prints the inbox of a mail recipient by making a GET request to the /{recipient} endpoint, where the recipient is provided in the argument 
 
     Args:
-        recipient (str): All mail recieved by this person (their inbox) will be printed
+        recipient (str): The recipient of the mail to be printed
     Returns:
         None -> does not return anything
     """
@@ -48,7 +48,7 @@ def get_sent(sender: str) -> None:
     Prints all the sent mail of a user by making a GET request to the /{sender} endpoint, where the sender is provided in the argument
 
     Args:
-        sender (str): All mail sent by this person will be printed
+        sender (str): The sender of the mail to be printed
     Returns:
         None -> does not return anything
     """
