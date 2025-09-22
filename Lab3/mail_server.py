@@ -24,11 +24,25 @@ def load_mail() -> List[Dict[str, str]]:
 
 def save_mail(mail: List[Dict[str, str]]) -> None:
     """TODO: fill out this docstring (using the load_mail docstring as a guide)
+    Saves the mail to the json file
+
+    Args:
+        mail (list): a list of dictionaries representing the mail entries
+
+    Returns:
+        None: does not return anything
     """
     thisdir.joinpath('mail_db.json').write_text(json.dumps(mail, indent=4))
 
 def add_mail(mail_entry: Dict[str, str]) -> str:
     """TODO: fill out this docstring (using the load_mail docstring as a guide)
+    Adds new mail entry to list of dictionaries representing mail entries, assigns ID to new mail, calls save_mail to save the mail
+
+    Args:
+        mail_entry (dict): a dictionary representing a new mail entry
+
+    Returns:
+        str: the mail entry's unique ID
     """
     mail = load_mail()
     mail.append(mail_entry)
@@ -38,6 +52,13 @@ def add_mail(mail_entry: Dict[str, str]) -> str:
 
 def delete_mail(mail_id: str) -> bool:
     """TODO: fill out this docstring (using the load_mail docstring as a guide)
+    Deletes a mail entry from the list of dictionaries representing mail entries
+
+    Args:
+        mail_id (str): the ID of the mail to delete
+
+    Returns:
+        bool: True if the mail was deleted succesfully, otherwise False
     """
     mail = load_mail()
     for i, entry in enumerate(mail):
@@ -50,6 +71,13 @@ def delete_mail(mail_id: str) -> bool:
 
 def get_mail(mail_id: str) -> Optional[Dict[str, str]]:
     """TODO: fill out this docstring (using the load_mail docstring as a guide)
+    Gets a specific mail entry from the list of entries by ID
+
+    Args:
+        mail_id (str): the ID of the mail to retrieve
+
+    Returns:
+        dict: returns the dictonary representing the mail entry (if not found, returns None)
     """
     mail = load_mail()
     for entry in mail:
@@ -60,6 +88,13 @@ def get_mail(mail_id: str) -> Optional[Dict[str, str]]:
 
 def get_inbox(recipient: str) -> List[Dict[str, str]]:
     """TODO: fill out this docstring (using the load_mail docstring as a guide)
+    Retrieves all mail entries received by a specific recipient
+
+    Args:
+        recipient (str): the name of the recipient
+
+    Returns:
+        list: a list of dictionaries representing each mail entry received by (sent to) the specified recipient
     """
     mail = load_mail()
     inbox = []
@@ -71,6 +106,13 @@ def get_inbox(recipient: str) -> List[Dict[str, str]]:
 
 def get_sent(sender: str) -> List[Dict[str, str]]:
     """TODO: fill out this docstring (using the load_mail docstring as a guide)
+    Retrieves all mail entries sent by a specific sender
+
+    Args:
+        sender (str): the name of the sender
+
+    Returns:
+        list: a list of dictionaries representing each mail entry sent by the specified sender
     """
     mail = load_mail()
     sent = []
