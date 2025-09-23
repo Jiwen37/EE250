@@ -23,4 +23,4 @@ PUT was not used in our mail server. To use this method, we could add the option
 
 ### Question 4: Why are API keys used for many RESTful APIs? What purpose do they serve? Make sure to cite any online resources you use to answer this question!
 
-They improve security by limiting the number of people who can use the API.
+They improve security by limiting public access of the API. Likewise, they also allow rate limiting in the same way.
