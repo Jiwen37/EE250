@@ -13,7 +13,7 @@ They are stateless, which means every request contains all the information neede
 
 ### Question 2: According to the definition of "resources" provided in the AWS article above, What are the resources the mail server is providing to clients?
 
-the mail entries (messages?)
+The mail entries (messages sent) are the resources that the mail server is providing.
 
 
 ### Question 3: What is one common REST Method not used in our mail server? How could we extend our mail server to use this method?
