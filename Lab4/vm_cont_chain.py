@@ -31,4 +31,5 @@ if __name__ == '__main__':
 
     client.loop_start()
 
-    client.loop_forever()
+    while True:
+        client.publish("cynthliu/pong", str(1))
