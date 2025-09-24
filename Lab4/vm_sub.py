@@ -14,13 +14,12 @@ def on_connect(client, userdata, flags, rc):
 
     print("Connected to server (i.e., broker) with result code "+str(rc))
     #replace user with your USC username in all subscriptions
-    #client.subscribe("cynthliu/ipinfo")
-    client.subscribe("cynthliu/ip")
+    client.subscribe("cynthliu/ipinfo")
     client.subscribe("cynthliu/date")
     client.subscribe("cynthliu/time")
     
     #Add the custom callbacks by indicating the topic and the name of the callback handle
-    client.message_callback_add("cynthliu/ip", on_message_from_ip)
+    client.message_callback_add("cynthliu/ipinfo", on_message_from_ipinfo)
     client.message_callback_add("cynthliu/date", on_message_from_date)
     
 
@@ -32,7 +31,7 @@ def on_message(client, userdata, msg):
     print("Default callback - topic: " + msg.topic + "   msg: " + str(msg.payload, "utf-8"))
 
 #Custom message callback.
-def on_message_from_ip(client, userdata, message):
+def on_message_from_ipinfo(client, userdata, message):
    print("Custom callback  - IP Message: "+message.payload.decode())
 
 def on_message_from_date(client, userdata, message):
