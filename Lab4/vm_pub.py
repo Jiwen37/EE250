@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 
 if __name__ == '__main__':
     #get IP address
-    ip_address=0 
+    ip_address="10.23.19.230" 
     """your code here"""
     #create a client object
     client = mqtt.Client()
@@ -44,6 +44,17 @@ if __name__ == '__main__':
         time.sleep(4)
 
         #get date and time 
-        """your code here"""
+        time = datetime.now()
         #publish date and time in their own topics
+        date_str = time.strftime("%Y-%m-%d")
+        time_str = time.strftime("%H:%M:%S")
+        client.publish("cynthliu/ip", f"{ip_address}")
+        #publish date
+        client.publish("cynthliu/date", date_str)
+        print(f"Publishing date: {date_str} on topic cynthliu/date")
+
+        #publish time
+        client.publish("cynthliu/time", time_str)
+        print(f"Prublishing time: {time_str} on topic cynthliu/time")
+
         """your code here"""
