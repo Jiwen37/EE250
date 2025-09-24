@@ -44,17 +44,17 @@ if __name__ == '__main__':
         time.sleep(4)
 
         #get date and time 
-        time = datetime.now()
+        now = datetime.now()
         #publish date and time in their own topics
-        date_str = time.strftime("%Y-%m-%d")
-        time_str = time.strftime("%H:%M:%S")
+        date_str = now.strftime("%Y-%m-%d")
+        time_str = now.strftime("%H:%M:%S")
 
         #publish date
         client.publish("cynthliu/date", date_str)
         print(f"Publishing date: {date_str} on topic cynthliu/date")
-
+        time.sleep(1)
         #publish time
         client.publish("cynthliu/time", time_str)
         print(f"Prublishing time: {time_str} on topic cynthliu/time")
-
+        time.sleep(1)
         """your code here"""
