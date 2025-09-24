@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
     while True:
         #replace user with your USC username in all subscriptions
-        client.publish("user/ipinfo", f"{ip_address}")
+        client.publish("cynthliu/ipinfo", f"{ip_address}")
         print("Publishing ip address")
         time.sleep(4)
 
@@ -48,7 +48,7 @@ if __name__ == '__main__':
         #publish date and time in their own topics
         date_str = time.strftime("%Y-%m-%d")
         time_str = time.strftime("%H:%M:%S")
-        client.publish("cynthliu/ip", f"{ip_address}")
+
         #publish date
         client.publish("cynthliu/date", date_str)
         print(f"Publishing date: {date_str} on topic cynthliu/date")
