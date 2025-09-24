@@ -30,3 +30,5 @@ if __name__ == '__main__':
 
 
     client.loop_start()
+
+    client.loop_forever()
