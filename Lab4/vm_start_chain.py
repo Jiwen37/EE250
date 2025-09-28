@@ -11,7 +11,7 @@ def on_connect(client,userdata,flags,rc):
     client.message_callback_add("cynthliu/pong", on_message_from_pong)
 
     client.publish("cynthliu/ping", str(num))
-    print("Publishing initial number to ping: " + str(START_NUMBER))
+    print("Publishing initial number to ping: " + str(num))
 
 def on_message_from_pong(client, userdata, message):
     new_num = message.payload.decode()
