@@ -29,4 +29,4 @@ if __name__ == '__main__':
     client.connect(host="172.20.10.4", port=1883, keepalive=60)
 
 
-    client.loop_start()
+    client.loop_forever()
