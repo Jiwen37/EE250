@@ -11,7 +11,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("cynthliu/ping", on_message_from_ping)
 
 def on_message_from_ping(client, userdata, message):
-    num_str = message.paylaod.decode()
+    num_str = message.payload.decode()
     print("Custom callback  - Number: "+ num_str)
 
     num = int(num_str)

@@ -2,19 +2,18 @@ import paho.mqtt.client as mqtt
 import time
 import socket
 
-num = 0
+num = -1
 
 def on_connect(client,userdata,flags,rc):
     print("Connected to server with results code "+str(rc))
-    client.subscribe("cynthliu/pong")
+    client.subscribe("cynthliu/ping")
 
-    client.message_callback_add("cynthliu/pong", on_message_from_pong)
-
+    client.message_callback_add("cynthliu/ping", on_message_from_pong)
 def on_message_from_pong(client, userdata, message):
-    new_num = int(message.payload.decode())
-    print(message.payload.decode())
+    new_num = int(message_payload.decode())
     if(num!=new_num):
-        num = new_num+1
+        num = new_num + 1
+    print(message.payload.decode())
 
 if __name__ == '__main__':
     client = mqtt.Client()
@@ -25,6 +24,7 @@ if __name__ == '__main__':
     time.sleep(1)
 
     while True:
-        client.publish("cynthliu/ping", f"{num}")
-        print(f"published ping\n")
+
+        client.publish("cynthliu/pong", f"{num}")
+        print(f"published pong\n")
         time.sleep(1)
