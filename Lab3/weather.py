@@ -3,7 +3,7 @@ import json
 import pprint
 
 # WeatherAPI key
-WEATHER_API_KEY = '2d173894f61f463babd234734252209'  # TODO: Replace with your own WeatherAPI key
+WEATHER_API_KEY = ''  # TODO: Replace with your own WeatherAPI key
 
 def get_weather(city):
     # TODO: Build the API request URL using the base API endpoint, the API key, and the city name provided by the user.
