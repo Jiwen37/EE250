@@ -1,5 +1,5 @@
 #Names: Jiwen Li (Jiwen37), Cynthia Liu (frawgmanman)
-#GitHub Repo Name: EE250
+#GitHub Repo Name: Jiwen37/EE250
 
 
 """EE 250L Lab 04 Starter Code
