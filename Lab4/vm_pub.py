@@ -1,3 +1,7 @@
+#Names: Jiwen Li (Jiwen37), Cynthia Liu (frawgmanman)
+#GitHub Repo Name: EE250
+
+
 """EE 250L Lab 04 Starter Code
 Run vm_sub.py in a separate terminal on your VM."""
 
