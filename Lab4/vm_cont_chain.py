@@ -1,3 +1,6 @@
+#Names: Jiwen Li (Jiwen37), Cynthia Liu (frawgmanman)
+#GitHub Repo Name: Jiwen37/EE250
+
 import paho.mqtt.client as mqtt
 import time
 from datetime import datetime
