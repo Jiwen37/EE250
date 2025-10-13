@@ -60,7 +60,7 @@ As distance increases, both TCP and UDP throughput will decrease due to weaker W
 
 Question 2: At what distance does significant packet loss occur for UDP?
 
-*ANSWER NEEDED*
+Based on our data/graphs, significant packet loss for UDP occurs at 15 m.
 
 
 Question 3: Why does UDP experience more packet loss than TCP?
