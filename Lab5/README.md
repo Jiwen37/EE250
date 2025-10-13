@@ -7,6 +7,7 @@
 ## Lab Question Answers
 
 Part 1:
+\n
 Question 1: What is dBm? What values are considered good and bad for WiFi signal strength?
 dBm is decibel-milliwatts, which is used to measure power levels. For WiFi signal strength, the received power is measured in dBm. The values are negative, and the closer to zero it is, the stronger the signal is. Generally, above -60 would be considered good WiFi signal strength, and below -70 would be bad for WiFi signal strength.
 
