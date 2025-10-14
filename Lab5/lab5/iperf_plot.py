@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 
-distances = [2,5,10,15]
+distances = [2,5,10,15,30]
 num_runs = 5
 tcp_throughput = []
 udp_throughput = []
@@ -52,14 +52,14 @@ plt.title('Average Throughput vs Distance')
 plt.legend()
 plt.grid(True)
 
-plt.xlim(0, 16)
+plt.xlim(0, 32)
 plt.savefig("throughput_vs_distance.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 tcp_runs_float = np.array(tcp_runs, dtype = float)
 udp_runs_float = np.array(udp_runs, dtype = float)
 runs = [1,2,3,4,5]
-fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 
 
 axes[0,0].plot(runs, tcp_runs_float[0], 'o-', label = "TCP Throughput")
@@ -93,6 +93,14 @@ axes[1,1].set_xlabel('Run')
 axes[1,1].set_ylabel('Throughput (Mbps)')
 axes[1,1].legend()
 axes[1,1].grid(True)
+
+axes[1,2].plot(runs, tcp_runs_float[4], 'o-', label = "TCP Throughput")
+axes[1,2].plot(runs, udp_runs_float[4], 's-', label = "UDP Throughput")
+axes[1,2].set_title('30m Runs')
+axes[1,2].set_xlabel('Run')
+axes[1,2].set_ylabel('Throughput (Mbps)')
+axes[1,2].legend()
+axes[1,2].grid(True)
 plt.savefig("runs.png", dpi=300, bbox_inches='tight')
 plt.show()
 
