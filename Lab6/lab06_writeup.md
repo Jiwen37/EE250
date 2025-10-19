@@ -3,6 +3,7 @@
 ### Reflection Questions
 
 4.1: Suppose you just cloned a repository that included one python file, my_first_file.py, and you now want to add a second file to your repository named my_second_file.py which contains the following code and push it to Github.com.
+
 Code -
 print("Hello World")
 Complete the sequence of linux shell commands:
@@ -27,3 +28,5 @@ There is a built in delay to the ultrasonicRead() function of 200 ms, which is w
 It uses an ADC to convert voltage values between 0 and 5 V to an integer value between 0-1023 using a predefined equation for conversion that is linear. The RPi cannot do this directly because it doesn't have an ADC, the pins are digital only and therefore only have two logic states: high and low. This means it can't convert the input voltages to all those different integer values, but rather only two states.
 
 4.5: Your LCD RGB Backlight screen is not displaying any text even though your code executes without errors. Describe how you would debug the issue. Include at least two terminal commands.
+
+First we would check that the LCD is wired correctly and receiving all necessary inputs (power, ground, SDA, SCL). Next, we can check that the LCD can be detected by the RPi through I2C by using the terminal command sudo i2cdetect -y 1 to scan for I2C devices. If it returns an error or no devices, we can check if I2C is enabled by running lsmod | grep i2c. If not enabled, we can run sudo raspi-config to to enable it. Lastly, we can try writing on the LCD manually by running sudo i2cset -y 1 0x3e 0x80 0x01 first to clear the screen, then sudo i2cset -y 1 0x3e 0x40 0x74 to print "t" for test, to see if writing to the LCD manually works. If still nothing shows, then it may be a hardware problem.
