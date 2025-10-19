@@ -24,6 +24,6 @@ There is a built in delay to the ultrasonicRead() function of 200 ms, which is w
 
 4.4: When you rotate the Grove Rotary Angle Sensor, its analog output voltage changes between 0 V and 5 V and the GrovePi library reports integer values between 0 and 1023. Explain how this conversion works and why the Raspberry Pi cannot do it directly.
 
-It uses an ADC to convert voltage values between 0 and 5 V to an integer value between 0-1023 using a predefined equation for conversion that is linear. The RPi cannot do this directly because it doesn't have an ADC, the pins read digital only and therefore only have two logic states: high and low.
+It uses an ADC to convert voltage values between 0 and 5 V to an integer value between 0-1023 using a predefined equation for conversion that is linear. The RPi cannot do this directly because it doesn't have an ADC, the pins are digital only and therefore only have two logic states: high and low. This means it can't convert the input voltages to all those different integer values, but rather only two states.
 
 4.5: Your LCD RGB Backlight screen is not displaying any text even though your code executes without errors. Describe how you would debug the issue. Include at least two terminal commands.
