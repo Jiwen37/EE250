@@ -25,7 +25,7 @@ git push
 
 4.2: Describe the workflow you adopted for this lab (i.e. did you develop on your VM and push/pull to get code to your RPi, did you edit files directly on your RPi, etc.). Are there ways you might be more efficient in the next lab (i.e. learning a text-based editor so you can edit natively on the RPi, understanding Git commands better, etc.)?
 
-ANSWER HERE AFTER
+We developed the code on the VM and then push/pulled to get the code on the RPi, then ran the code on the RPi and debugged it directly on the RPi using nano. To be more efficient in the next lab, we could work on becoming more familiar with the text-based editor so that we can edit with more efficiency, and also ensure all necessary libraries are installed correctly before beginning the code debugging process so that any code issues can be resolved quicker and not be confused with path or missing module issues.
 
 4.3: In the starter code, we added a 200 ms sleep. Suppose you needed to poll the ultrasonic ranger as fast as possible, so you removed the sleep function. Now, your code has just the function ultrasonicRead() inside a while loop. However, even though there are no other functions in the while loop, you notice there is a constant delay between each reading. Dig through the python library to find out why there is a constant delay. What is the delay amount? In addition, what communication protocol does the Raspberry Pi use to communicate with the Atmega328P on the GrovePi when it tries to read the ultrasonic ranger output using the `grovepi` python library?
 
