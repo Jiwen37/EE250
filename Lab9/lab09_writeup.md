@@ -1,4 +1,4 @@
-# Lab 9
+# Lab 9 Writeup
 ## Cynthia Liu, Jiwen Li
 
 ### What type of authentication are we using here (currently)? Does it use any keys?
