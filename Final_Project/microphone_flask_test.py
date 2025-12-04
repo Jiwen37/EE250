@@ -65,12 +65,12 @@ def update_listening_state():
     # "a" key starts listening
     if keyboard.is_pressed("a") and not listening:
         listening = True
-        print("🎤 Microphone ON")
+        print("Microphone ON")
 
     # "s" key stops listening
     if keyboard.is_pressed("s") and listening:
         listening = False
-        print("🔇 Microphone OFF")
+        print("Microphone OFF")
 
 
 # ---------------------------
