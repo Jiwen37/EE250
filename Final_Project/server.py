@@ -1,30 +1,51 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, jsonify
+import json
+import os
+from threading import Lock
 
 app = Flask(__name__)
 
-# In-memory storage for simplicity
-data_entries = []
+DATA_FILE = "data.json"
+file_lock = Lock()  # prevents file corruption if many writes happen
 
-@app.route('/')
-def index():
-    # Render HTML page with the data
-    return render_template('index.html', entries=data_entries)
+def load_data():
+    """Read and return the list of entries from data.json."""
+    if not os.path.exists(DATA_FILE):
+        return []
+    with open(DATA_FILE, "r") as f:
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            return []  # fallback if file corrupts
+            
 
-@app.route('/add', methods=['POST'])
+def save_data(data):
+    """Write the updated list back to data.json safely."""
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+
+@app.route("/add", methods=["POST"])
 def add_entry():
-    """
-    Expects JSON like: {"text": "Hello world", "frequency": 440}
-    """
-    entry = request.get_json()
-    if entry and "text" in entry and "frequency" in entry:
-        # Add the new entry
-        data_entries.append({
-            "text": entry["text"],
-            "frequency": entry["frequency"]
-        })
-        return {"status": "success"}, 200
-    else:
-        return {"status": "error", "message": "Invalid data"}, 400
+    content = request.get_json()
+    if not content or "text" not in content or "frequency" not in content:
+        return jsonify({"error": "Missing 'text' or 'frequency'"}), 400
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    text = content["text"]
+    freq = content["frequency"]
+
+    with file_lock:
+        data = load_data()
+        data.append({"text": text, "frequency": freq})
+        save_data(data)
+
+    return jsonify({"status": "ok", "message": "Entry added"}), 200
+
+@app.route("/data", methods=["GET"])
+def get_data():
+    with file_lock:
+        data = load_data()
+    return jsonify(data), 200
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=6767, debug=True)
+
