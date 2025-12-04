@@ -4,7 +4,7 @@ import json
 import requests
 
 #Flask Server
-SERVER_URL = "http://10.23.38.236:6767/add"
+SERVER_URL = "http://172.20.10.4:6767/add_entry"
 
 #load speech model for speech to text
 model = vosk.Model("/home/pi/Documents/github/EE250/Final_Project/vosk-model-small-en-us-0.15")
@@ -12,7 +12,7 @@ recognizer = vosk.KaldiRecognizer(model, 16000)
 
 #set microphone settings
 RATE = 16000
-CHUNK = 1024
+CHUNK = 4000
 
 
 # Send text and frequency to Flask server after conversion
