@@ -3,20 +3,13 @@ import vosk
 import json
 import requests
 
-# Only load keyboard control if enabled
-ENABLE_KEY_CONTROL = True
-if ENABLE_KEY_CONTROL:
-    import keyboard   # listens for "a" and "s" keys
-
-
 # ---------------------------
-# Server information
+# Server information (from your client code)
 # ---------------------------
 SERVER_URL = "http://10.23.38.236:6767/add"
 
-
 # ---------------------------
-# Load the Vosk STT model
+# Load the Vosk speech model
 # ---------------------------
 model = vosk.Model("/home/pi/Documents/github/EE250/Final_Project/vosk-model-small-en-us-0.15")
 recognizer = vosk.KaldiRecognizer(model, 16000)
@@ -26,11 +19,11 @@ RATE = 16000
 CHUNK = 1024
 
 
-# ---------------------------
-# Function: send text + frequency to server
-# ---------------------------
 def send_to_server(text, frequency):
-    """Send recognized text to Flask server (your original client code)."""
+    """
+    Send the text and frequency to your Flask server.
+    This function uses your original client code logic.
+    """
 
     payload = {
         "text": text,
@@ -49,36 +42,8 @@ def send_to_server(text, frequency):
         print("Failed to send data:", e)
 
 
-# ---------------------------
-# Optional: Keyboard-based start/stop logic
-# ---------------------------
-listening = True  # starts ON by default; keyboard can change it
-
-
-def update_listening_state():
-    """Update microphone on/off based on key presses."""
-    global listening
-
-    if not ENABLE_KEY_CONTROL:
-        return  # If key control disabled, ignore
-
-    # "a" key starts listening
-    if keyboard.is_pressed("a") and not listening:
-        listening = True
-        print("Microphone ON")
-
-    # "s" key stops listening
-    if keyboard.is_pressed("s") and listening:
-        listening = False
-        print("Microphone OFF")
-
-
-# ---------------------------
-# Main microphone + Vosk loop
-# ---------------------------
 def main():
-    global listening
-
+    # Start the microphone
     audio = pyaudio.PyAudio()
     stream = audio.open(format=pyaudio.paInt16,
                         channels=1,
@@ -86,38 +51,35 @@ def main():
                         input=True,
                         frames_per_buffer=CHUNK)
 
-    # Display key instructions only if enabled
-    if ENABLE_KEY_CONTROL:
-        print("Press 'a' to START, 's' to STOP.")
-    else:
-        print("Listening... (Ctrl+C to stop)")
+    print("Listening... (Ctrl+C to stop)")
 
     try:
         while True:
-            # Check keyboard keys (if enabled)
-            update_listening_state()
+            # Read a small piece of audio
+            data = stream.read(CHUNK, exception_on_overflow=False)
 
-            # Only process audio if microphone is ON
-            if listening:
-                data = stream.read(CHUNK, exception_on_overflow=False)
+            # When Vosk detects a full spoken phrase
+            if recognizer.AcceptWaveform(data):
+                result = json.loads(recognizer.Result())
+                text = result.get("text", "").strip()
 
-                # Check for full phrase
-                if recognizer.AcceptWaveform(data):
-                    result = json.loads(recognizer.Result())
-                    text = result.get("text", "").strip()
+                # If we recognized real speech
+                if text:
+                    print("You said:", text)
 
-                    if text:
-                        print("You said:", text)
+                    # Use recognized speech as the "text" field
+                    detected_text = text
 
-                        # Placeholder for now
-                        freq = 0.0
+                    # Placeholder frequency for now
+                    detected_frequency = 0.0
 
-                        # Send to your server
-                        send_to_server(text, freq)
+                    # Send the data to your Flask server
+                    send_to_server(detected_text, detected_frequency)
 
     except KeyboardInterrupt:
-        print("\nStopping program...")
+        print("\nStopping...")
 
+    # Close the microphone when done
     stream.stop_stream()
     stream.close()
     audio.terminate()
