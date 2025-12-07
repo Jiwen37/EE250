@@ -21,6 +21,7 @@ def get_data():
         entries = []
     return jsonify(entries)
 
+#creating an entry
 @app.route("/add_entry", methods=["POST"])
 def add_entry():
     data = request.get_json()

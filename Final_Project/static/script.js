@@ -1,17 +1,17 @@
 function escapeHtml(s) {
-  if (!s && s !== 0) return "";
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    if (!s && s !== 0) return "";
+    return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
-function previewText(text, words=8) {
-  const toks = text.trim().split(/\s+/);
-  if (toks.length <= words) return escapeHtml(text);
-  return escapeHtml(toks.slice(0, words).join(" ")) + "…";
+function previewText(text, words = 8) {
+    const toks = text.trim().split(/\s+/);
+    if (toks.length <= words) return escapeHtml(text);
+    return escapeHtml(toks.slice(0, words).join(" ")) + "…";
 }
 
 const latestTitle = document.getElementById("latestTitle");
@@ -44,33 +44,31 @@ function getPeakFrequency(frequencies, magnitudes) {
     return frequencies[peakIdx];
 }
 function classifyVoice(frequency) {
-    if (frequency < 165) return "Male";
-    else if (frequency < 255) return "Female";
-    else return "Unknown";
+    if (frequency < 140) return "Male";
+    else return "Female";
 }
 
 
 function showModal(entry) {
-    modalTitle.textContent = entry.text.split(/\s+/).slice(0,6).join(" ") + (entry.text.split(/\s+/).length>6?"…":"");
+    modalTitle.textContent = entry.text.split(/\s+/).slice(0, 6).join(" ") + (entry.text.split(/\s+/).length > 6 ? "…" : "");
     modalBody.textContent = entry.text;
 
     const ctx = document.getElementById("modalSpectrum").getContext("2d");
 
-    if(entry.frequencies && entry.magnitudes 
-       && Array.isArray(entry.frequencies) && Array.isArray(entry.magnitudes)) {
-        
+    if (entry.frequencies && entry.magnitudes
+        && Array.isArray(entry.frequencies) && Array.isArray(entry.magnitudes)) {
+
         modalFreq.textContent = "Frequency Spectrum";
 
-        // Destroy old chart
-        if(spectrumChart) spectrumChart.destroy();
+        if (spectrumChart) spectrumChart.destroy();
 
         spectrumChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: entry.frequencies,   // x-axis = frequencies
+                labels: entry.frequencies,
                 datasets: [{
                     label: 'Relative Magnitude',
-                    data: entry.magnitudes,  // y-axis = magnitudes
+                    data: entry.magnitudes,
                     backgroundColor: 'rgba(54, 162, 235, 0.5)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
@@ -86,7 +84,7 @@ function showModal(entry) {
                     x: {
                         type: 'linear',
                         min: 0,
-                        max: 300,
+                        max: 600,
                         title: { display: true, text: 'Frequency (Hz)' }
                     }
                 }
@@ -95,7 +93,7 @@ function showModal(entry) {
 
     } else {
         modalFreq.textContent = "Frequency: " + entry.frequency + " Hz";
-        if(spectrumChart) spectrumChart.destroy();
+        if (spectrumChart) spectrumChart.destroy();
     }
     let peakFreq = getPeakFrequency(entry.frequencies, entry.magnitudes);
     let voiceType = peakFreq ? classifyVoice(peakFreq) : "Unknown";
@@ -103,53 +101,52 @@ function showModal(entry) {
     modalFreq.textContent = `Peak: ${peakFreq ? peakFreq.toFixed(1) : "N/A"} Hz (${voiceType})`;
 
     modalBackdrop.style.display = "flex";
-    modalBackdrop.setAttribute("aria-hidden","false");
+    modalBackdrop.setAttribute("aria-hidden", "false");
 }
 
 
 function hideModal() {
-  modalBackdrop.style.display = "none";
-  modalBackdrop.setAttribute("aria-hidden", "true");
+    modalBackdrop.style.display = "none";
+    modalBackdrop.setAttribute("aria-hidden", "true");
 }
 
 let lastSeenLen = 0;
 let latestChart = null;
 
 async function fetchDataAndRender() {
-  try {
-    const resp = await fetch("/data", {cache: "no-store"});
-    if (!resp.ok) throw new Error("Network response was not ok");
-    const data = await resp.json();
+    try {
+        const resp = await fetch("/data", { cache: "no-store" });
+        if (!resp.ok) throw new Error("Network response was not ok");
+        const data = await resp.json();
 
-    lastUpdated.textContent = "Updated: " + new Date().toLocaleTimeString();
+        //lastUpdated.textContent = "Updated: " + new Date().toLocaleTimeString();
 
-    if (!Array.isArray(data) || data.length === 0) {
-      emptyMsg.style.display = "block";
-      latestTitle.textContent = "No entries yet";
-      latestBody.textContent = "";
-      latestMeta.textContent = "";
-      inboxList.innerHTML = "<div class='empty' id='emptyMsg'>No entries yet.</div>";
-      lastSeenLen = 0;
-      return;
-    }
+        if (!Array.isArray(data) || data.length === 0) {
+            emptyMsg.style.display = "block";
+            latestTitle.textContent = "No entries yet";
+            latestBody.textContent = "";
+            latestMeta.textContent = "";
+            inboxList.innerHTML = "<div class='empty' id='emptyMsg'>No entries yet.</div>";
+            lastSeenLen = 0;
+            return;
+        }
 
-    emptyMsg.style.display = "none";
+        emptyMsg.style.display = "none";
 
-    const latest = data[data.length - 1];
+        const latest = data[data.length - 1];
 
-   latestTitle.textContent = previewText(latest.text, 40);
+        latestTitle.textContent = previewText(latest.text, 40);
         latestBody.textContent = latest.text;
         latestMeta.textContent = "Frequency Spectrum";
 
-        // Render latest entry chart as a bar chart
         const latestCtx = document.getElementById("latestSpectrum").getContext("2d");
-        if(latest.frequencies && latest.magnitudes &&
-           Array.isArray(latest.frequencies) && Array.isArray(latest.magnitudes)) {
+        if (latest.frequencies && latest.magnitudes &&
+            Array.isArray(latest.frequencies) && Array.isArray(latest.magnitudes)) {
 
-            if(latestChart) latestChart.destroy();
+            if (latestChart) latestChart.destroy();
 
             latestChart = new Chart(latestCtx, {
-                type: 'bar', // <-- bar chart for latest entry
+                type: 'bar',
                 data: {
                     labels: latest.frequencies,
                     datasets: [{
@@ -164,48 +161,48 @@ async function fetchDataAndRender() {
                     responsive: true,
                     scales: {
                         y: { beginAtZero: true, title: { display: true, text: 'Magnitude' } },
-                        x: { type: 'linear', min: 0, max: 300, title: { display: true, text: 'Frequency (Hz)' } }
+                        x: { type: 'linear', min: 0, max: 600, title: { display: true, text: 'Frequency (Hz)' } }
                     }
                 }
             });
 
         } else {
-            if(latestChart) latestChart.destroy();
+            if (latestChart) latestChart.destroy();
         }
-    const reversed = data.slice().reverse();
-    let html = "";
+        const reversed = data.slice().reverse();
+        let html = "";
 
-    reversed.forEach((entry, idx) => {
-      const preview = previewText(entry.text, 8);
-      const originalIndex = data.length - 1 - idx;
-      html += `
+        reversed.forEach((entry, idx) => {
+            const preview = previewText(entry.text, 8);
+            const originalIndex = data.length - 1 - idx;
+            html += `
         <div class="item" data-index="${originalIndex}" tabindex="0" role="button">
           <div>
             <div class="preview">${preview}</div>
           </div>
-          <div class="timestamp">#${originalIndex}</div>
+          <div class="timestamp">${originalIndex+1}</div>
         </div>
       `;
-    });
+        });
 
-    inboxList.innerHTML = html;
+        inboxList.innerHTML = html;
 
-    document.querySelectorAll(".item").forEach(el => {
-      el.addEventListener("click", () => showModal(data[parseInt(el.getAttribute("data-index"))]));
-      el.addEventListener("keydown", ev => {
-        if (ev.key === "Enter" || ev.key === " ") {
-          ev.preventDefault();
-          showModal(data[parseInt(el.getAttribute("data-index"))]);
-        }
-      });
-    });
+        document.querySelectorAll(".item").forEach(el => {
+            el.addEventListener("click", () => showModal(data[parseInt(el.getAttribute("data-index"))]));
+            el.addEventListener("keydown", ev => {
+                if (ev.key === "Enter" || ev.key === " ") {
+                    ev.preventDefault();
+                    showModal(data[parseInt(el.getAttribute("data-index"))]);
+                }
+            });
+        });
 
-    lastSeenLen = data.length;
+        lastSeenLen = data.length;
 
-  } catch (err) {
-    console.error("Failed to fetch /data:", err);
-    lastUpdated.textContent = "Error fetching data";
-  }
+    } catch (err) {
+        console.error("Failed to fetch /data:", err);
+        lastUpdated.textContent = "Error fetching data";
+    }
 }
 
 fetchDataAndRender();
