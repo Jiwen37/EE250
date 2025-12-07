@@ -7,6 +7,7 @@ Open webpage from the Flask server
 
 External Libraries Used:
 pyaudio, vosk, json, requests, numpy
+vosk-model-small-en-us-0.15/
 
 LLM Session Links:
 Vosk/microphone setup: https://chatgpt.com/share/6935f4c4-8ca8-800f-83d9-62b14d8be87e
