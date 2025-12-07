@@ -11,3 +11,5 @@ vosk-model-small-en-us-0.15/
 
 LLM Session Links:
 Vosk/microphone setup: https://chatgpt.com/share/6935f4c4-8ca8-800f-83d9-62b14d8be87e
+Flask server/front end: https://chatgpt.com/share/6936078a-2224-8012-9c7c-ce39ec780d25
+Note: I also used ChatGPT to help with css formatting and debugging the javascript but I lost the log (example: "why is the chart not showing up" + js script or "how do stack div x and div y on top of each other and center them on the page" + html and css script)
