@@ -1,9 +1,9 @@
 Names: Cynthia Liu, Jiwen Li
 
 To Compile/Execute Programs:
+Make sure computer and rpi are on the same network
 SSH into rpi and run microphone_speech.py on the rpi
-Run Flask server on laptop
-Open webpage from the Flask server
+Open a browser tab and search http://127.0.0.1:6767
 
 External Libraries Used:
 pyaudio, vosk, json, requests, numpy
