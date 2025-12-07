@@ -3,7 +3,7 @@ import vosk
 import json
 
 # Load the Vosk STT model
-model = vosk.Model("vosk-model-small-en-us-0.15")
+model = vosk.Model("/home/pi/Documents/github/EE250/Final_Project/vosk-model-small-en-us-0.15")
 recognizer = vosk.KaldiRecognizer(model, 16000)
 
 # Microphone settings
