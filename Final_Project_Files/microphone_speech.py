@@ -15,11 +15,7 @@ recognizer = vosk.KaldiRecognizer(model, 16000)
 # Send text and frequency to Flask server after conversion
 def send_to_server(text, freqs, mags):
 
-    payload = {
-        "text": text,
-        "frequencies": freqs,
-        "magnitudes": mags
-    }
+    payload = {"text": text, "frequencies": freqs, "magnitudes": mags}
 
     response = requests.post(SERVER_URL, json=payload)
 
