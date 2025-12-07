@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>RPi Inbox - Live Feed</title>
+    <title>Conversation Recorder</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -13,38 +13,28 @@
     <!--top of page-->
     <div class="container">
         <h1>Conversation Recorder</h1>
-        <div class="list-header">
-            <div class="muted" id="lastUpdated">—</div>
-        </div>
         <!--latest display-->
         <div id="latestContainer" class="latest" aria-live="polite">
-            <h2 id="latestTitle">No entries yet...</h2>
-            <div class="meta" id="latestMeta"></div>
+            <h2 id="title">No entries yet...</h2>
             <canvas id="latestSpectrum" style="width:100%; height:200px;"></canvas>
-            <p id="latestBody" class="muted"></p>
+            <p id="body" class="muted"></p>
         </div>
-
+        <!--Inbox-->
         <div class="inbox">
-            <div id="inboxList">
-                <div class="empty" id="emptyMsg">No entries yet.</div>
-            </div>
+            <div id="inboxList">No entries yet...</div>
         </div>
     </div>
 
     <!-- popup -->
-    <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
-        <div class="modal" role="document">
+    <div id="popuphaze" class="popup-bg" role="dialog" aria-hidden="true">
+        <div class="popup" role="document">
             <div style="display:flex;justify-content:space-between;align-items:center">
-                <h3 id="modalTitle">Entry</h3>
-                <button class="close-btn" id="modalClose">Close</button>
+                <h3 id="popupPrev">Entry</h3>
+                <button class="close-btn" id="closePopup">X</button>
             </div>
-            <div id="modalFreq" class="muted"></div>
-            <hr />
-            <pre id="modalBody" style="white-space:pre-wrap; font-family:inherit;"></pre>
-            <div id="modalFreq" class="muted"></div>
-            <canvas id="modalSpectrum" style="width:100%; height:200px;"></canvas>
-            <hr />
-            <pre id="modalBody" style="white-space:pre-wrap; font-family:inherit;"></pre>
+            <div id="popupFreq" class="muted"></div>
+            <pre id="popupText" style="white-space:pre-wrap; font-family:inherit;"></pre>
+            <canvas id="popupChart" style="width:100%; height:200px;"></canvas>
 
         </div>
     </div>

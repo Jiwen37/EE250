@@ -1,5 +1,5 @@
 body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    font-family: "Segoe UI", Roboto, Arial;
     margin: 24px;
     background: #aadddc;
     color: #111;
@@ -18,7 +18,7 @@ h1 {
     background: #fff;
     padding: 16px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(20, 20, 40, 0.06);
+    box-shadow: 0 2px 6px;
     margin-bottom: 18px;
 }
 
@@ -36,7 +36,7 @@ h1 {
     background: #fff;
     padding: 12px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(20, 20, 40, 0.04);
+    box-shadow: 0 2px 6px;
 }
 
 .item {
@@ -63,7 +63,7 @@ h1 {
     margin-left: 12px;
 }
 
-.timestamp {
+.index {
     color: #999;
     font-size: 12px;
     margin-left: 8px;
@@ -75,7 +75,7 @@ h1 {
     text-align: center;
 }
 
-.modal-backdrop {
+.popup-bg {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
@@ -85,16 +85,16 @@ h1 {
     z-index: 1000;
 }
 
-.modal {
+.popup {
     background: #fff;
     padding: 18px;
     border-radius: 8px;
     width: 90%;
     max-width: 600px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px;
 }
 
-.modal h3 {
+.popup h3 {
     margin-top: 0;
 }
 
@@ -106,25 +106,9 @@ h1 {
     cursor: pointer;
 }
 
-.meta {
-    color: #555;
-    margin-top: 8px;
-    font-weight: 600;
-}
 
 .muted {
     color: #777;
     font-size: 13px;
 }
 
-.list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.refresh-note {
-    color: #666;
-    font-size: 13px;
-}
