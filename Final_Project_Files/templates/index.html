@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Conversation Recorder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!--top of page-->
+    <div class="container">
+        <h1>Conversation Recorder</h1>
+        <!--latest display-->
+        <div id="latestContainer" class="latest" aria-live="polite">
+            <h2 id="title">No entries yet...</h2>
+            <canvas id="latestSpectrum" style="width:100%; height:200px;"></canvas>
+            <p id="body" class="muted"></p>
+        </div>
+        <!--Inbox-->
+        <div class="inbox">
+            <div id="inboxList">No entries yet...</div>
+        </div>
+    </div>
+
+    <!-- popup -->
+    <div id="popuphaze" class="popup-bg" role="dialog" aria-hidden="true">
+        <div class="popup" role="document">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3 id="popupPrev">Entry</h3>
+                <button class="close-btn" id="closePopup">X</button>
+            </div>
+            <div id="popupFreq" class="muted"></div>
+            <pre id="popupText" style="white-space:pre-wrap; font-family:inherit;"></pre>
+            <canvas id="popupChart" style="width:100%; height:200px;"></canvas>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
