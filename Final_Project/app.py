@@ -11,8 +11,20 @@ def index():
 #get all data in json file - easier for our purposes than getting one file at a time since we want to load everything every time
 @app.route("/data")
 def get_data():
-    with open(file, "r") as f:
-          return json.load(f)
+    if not os.path.exists("entries.json") or os.path.getsize("entries.json") == 0:
+        with open("entries.json", "w") as f:
+            json.dump([], f)
+
+    with open("entries.json", "r") as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError:
+            data = []
+            with open("entries.json", "w") as fw:
+                json.dump(data, fw)
+
+    return jsonify(data)
+
 
 #creating an entry
 @app.route("/add_entry", methods=["POST"])

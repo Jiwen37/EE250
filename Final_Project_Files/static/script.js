@@ -93,7 +93,6 @@ function hideModal() {
 
 let latestChart = null;
 
-//rendering site
 async function fetchDataAndRender() {
     try {
         const resp = await fetch("/data", { cache: "no-store" });
@@ -156,7 +155,9 @@ async function fetchDataAndRender() {
       `;
         });
 
+        const scrollTop = inboxList.scrollTop;
         inboxList.innerHTML = html;
+        inboxList.scrollTop = scrollTop;
 
         document.querySelectorAll(".item").forEach(el => {
             el.addEventListener("click", () => showModal(data[parseInt(el.getAttribute("data-index"))]));
