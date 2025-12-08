@@ -8,6 +8,7 @@ Open a browser tab and search http://127.0.0.1:6767
 External Libraries Used:
 pyaudio, vosk, json, requests, numpy
 vosk-model-small-en-us-0.15/
+*due to the size of the files in the above vosk model folder, we were unable to include it in the github repo
 
 LLM Session Links:
 Vosk/microphone setup: https://chatgpt.com/share/6935f4c4-8ca8-800f-83d9-62b14d8be87e
